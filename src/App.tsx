@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { Breadcrumbs } from "./components/Breadcrumbs";
 import { SiteFooter } from "./components/SiteFooter";
 import { SiteHeader } from "./components/SiteHeader";
 import { AboutPage, AssessmentPage, BackupPage, CommercialPage, ContactPage, EstimatorPage, FAQPage, HomePage, HowItWorksPage, NotFoundPage, PrivacyPage, ProjectsPage, ServicesPage, SolarPage, TermsPage } from "./pages/SitePages";
@@ -100,7 +99,6 @@ export default function App() {
   };
   return <>
     <SiteHeader pathname={path} />
-    {path !== "/" && <Breadcrumbs pathname={path} />}
     <main id="main"><Route path={path} /></main>
     <SiteFooter />
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />

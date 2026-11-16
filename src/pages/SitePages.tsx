@@ -1,10 +1,11 @@
-import { ArrowDown, ArrowRight, ArrowUpRight, BatteryCharging, Check, ChevronDown, CircleHelp, FileText, Gauge, Lightbulb, PlugZap, ShieldCheck, Sun, Wrench } from "lucide-react";
+import { ArrowDown, ArrowRight, ArrowUpRight, BatteryCharging, Check, ChevronDown, CircleHelp, FileText, Gauge, Lightbulb, ShieldCheck, Sun, Wrench } from "lucide-react";
 import { cloneElement, useState, type FormEvent, type ReactElement, type ReactNode } from "react";
 import faqs from "../content/faqs.json";
 import projects from "../content/projects.json";
 import content from "../content/site-content.json";
 import { businessConfig, calculateEstimate } from "../../shared/business";
 import { site } from "../config/site";
+import { Breadcrumbs } from "../components/Breadcrumbs";
 import { ConceptPlayer } from "../components/ConceptPlayer";
 import { EnquiryForm } from "../components/EnquiryForm";
 import { PowerIllustration } from "../components/PowerIllustration";
@@ -31,8 +32,28 @@ function Kicker({ children }: { children: ReactNode }) { return <span className=
 function SectionHeading({ kicker, title, copy, align = "left" }: { kicker: string; title: string; copy?: string; align?: "left" | "center" }) {
   return <div className={`section-heading align-${align}`}><Kicker>{kicker}</Kicker><h2>{title}</h2>{copy && <p>{copy}</p>}</div>;
 }
-function PageHero({ kicker, title, copy, actions, side }: { kicker: string; title: string; copy: string; actions?: ReactNode; side?: ReactNode }) {
-  return <section className="page-hero"><div className="container page-hero-grid"><div className="page-hero-copy"><Kicker>{kicker}</Kicker><h1>{title}</h1><p>{copy}</p>{actions}</div>{side && <div className="page-hero-side">{side}</div>}</div></section>;
+function PageHero({ kicker, title, copy, actions, side, simple = false }: { kicker: string; title: string; copy: string; actions?: ReactNode; side?: ReactNode; simple?: boolean }) {
+  return <section className={`page-hero${simple ? " page-hero--simple" : ""}`}>
+    <div className="container">
+      <Breadcrumbs pathname={window.location.pathname} />
+      <div className="page-hero-grid">
+        <div className="page-hero-copy">{!simple && <Kicker>{kicker}</Kicker>}<h1>{title}</h1><p>{copy}</p>{actions}</div>
+        {side && <div className="page-hero-side">{side}</div>}
+      </div>
+    </div>
+  </section>;
+}
+
+function ServiceFaqPreview({ indices }: { indices: number[] }) {
+  const questions = faqs.filter((_, index) => indices.includes(index));
+  return <section className="section-space service-faq">
+    <div className="container service-faq-content">
+      <h2>A few common questions.</h2>
+      <div className="service-faq-list">
+        {questions.map((faq) => <details key={faq.question}><summary>{faq.question}<ChevronDown size={18} /></summary><p>{faq.answer}</p></details>)}
+      </div>
+    </div>
+  </section>;
 }
 
 export function HomePage() {
@@ -52,11 +73,37 @@ export function ServicesPage() {
 }
 
 export function BackupPage() {
-  return <><PageHero kicker="BATTERY BACKUP" title="Keep the important circuits running." copy="A battery backup system can supply selected circuits when the grid is unavailable. No solar panels are required for this setup." actions={<ButtonLink href="/assessment">Plan your backup system</ButtonLink>} side={<div className="mini-spec"><div className="mini-spec-icon"><BatteryCharging size={26} /></div><span className="eyebrow">BACKUP SYSTEM</span><strong>Grid → Battery → Loads</strong><p>A clear path from stored energy to the circuits you choose to protect.</p><div className="mini-spec-tags"><span>Grid charged</span><span>Solar optional</span></div></div>} /><section className="section-dark"><div className="container dark-grid"><div><SectionHeading kicker="THE BASICS" title="Three parts. One clear purpose." copy="The inverter manages energy between the grid, battery and selected circuits. The right design depends on what you need to keep on." /><ul className="check-list check-light"><li><Check size={17} />Select which circuits matter most</li><li><Check size={17} />Choose a battery for the intended runtime</li><li><Check size={17} />Plan safe wiring and changeover</li></ul></div><ConceptPlayer /></div></section><section className="section-space"><div className="container"><SectionHeading kicker="WHAT CAN BE BACKED UP?" title="Start with what cannot wait." copy="A site review helps confirm which circuits and equipment fit the system design." /><div className="load-grid"><div><PlugZap /><h3>Lights & connectivity</h3><p>Lighting, routers and communications equipment.</p></div><div><Gauge /><h3>Essential work equipment</h3><p>Selected office, retail or clinic equipment, subject to its power needs.</p></div><div><BatteryCharging /><h3>Critical circuits</h3><p>Circuits identified with you during system planning.</p></div></div><p className="small-note">Motors, pumps, medical devices and other high-demand equipment need specific checks. No appliance is assumed to be suitable without confirming its starting and running power.</p></div></section></>;
+  return <>
+    <PageHero simple kicker="BATTERY BACKUP" title="Keep the important circuits running." copy="Battery backup can keep selected circuits running through an outage. The battery charges from the grid, so solar panels are not required." />
+    <section className="section-space service-detail">
+      <div className="container service-detail-grid">
+        <div className="service-detail-copy">
+          <article><h2>A quieter way to handle outages.</h2><p>A battery stores energy from the grid. The inverter supplies that energy to the appliances you choose and switches those circuits to backup during an outage.</p></article>
+          <article><h2>Start with what matters.</h2><p>We begin with the equipment you need to keep on, such as lights, refrigeration or communications. Pumps, cooking equipment and other high-demand loads need a separate sizing check.</p></article>
+          <article><h2>Capacity, explained simply.</h2><p>Your appliance power and required runtime help determine battery size. Use the preliminary estimator to organize your needs; a site review confirms the final design.</p><a className="text-link" href="/estimator">Open the preliminary estimator <ArrowRight size={16} /></a></article>
+        </div>
+        <ConceptPlayer title="How battery backup works" />
+      </div>
+    </section>
+    <ServiceFaqPreview indices={[1, 2, 3]} />
+  </>;
 }
 
 export function SolarPage() {
-  return <><PageHero kicker="SOLAR + BATTERY" title="Make power on site. Store what you need." copy="A hybrid system combines solar panels, an inverter and battery storage, with the grid available as support when conditions allow." actions={<ButtonLink href="/assessment">Discuss a hybrid system</ButtonLink>} side={<div className="solar-orbit"><div className="orbit-sun"><Sun size={34} /></div><div className="orbit-node orbit-panel">SOLAR PANELS</div><div className="orbit-node orbit-inverter">HYBRID<br />INVERTER</div><div className="orbit-node orbit-battery">BATTERY</div><div className="orbit-center">POWER<br />FLOW</div><span className="orbit-line line-one" /><span className="orbit-line line-two" /><span className="orbit-line line-three" /></div>} /><section className="section-space"><div className="container solar-content-grid"><div><SectionHeading kicker="HOW THE PIECES WORK" title="Energy in, storage ready." copy="Panels produce electricity during daylight. The inverter manages how energy is used and stored. Your design depends on the site and the loads you want to serve." /><div className="solar-facts"><article><span>01</span><h3>Solar panels</h3><p>Capture sunlight and convert it into electrical energy.</p></article><article><span>02</span><h3>Hybrid inverter</h3><p>Manages solar, grid, battery and selected loads.</p></article><article><span>03</span><h3>Battery storage</h3><p>Stores energy for later use when available and appropriately sized.</p></article></div></div><ConceptPlayer title="How a hybrid solar system works" captionFile="/captions/hybrid-solar.vtt" /></div></section><section className="note-band"><div className="container note-band-inner"><Sun size={23} /><p>Solar output changes with weather, shade, roof orientation and other site conditions. No savings or generation level is guaranteed by this preliminary information.</p></div></section></>;
+  return <>
+    <PageHero simple kicker="SOLAR + BATTERY" title="Make more of Uganda’s sunshine." copy="Solar panels and battery storage can work together to power selected circuits, with the grid available when solar and stored power are not enough." />
+    <section className="section-space service-detail">
+      <div className="container service-detail-grid">
+        <div className="service-detail-copy">
+          <article><h2>Sunlight in. Stored power for later.</h2><p>Solar panels produce electricity during daylight. A hybrid inverter manages how that power is used, stored in the battery or supported by the grid.</p></article>
+          <article><h2>Start with what matters.</h2><p>We begin with your essential circuits, operating hours and site conditions. Roof space, shade and equipment needs all shape the system discussion.</p></article>
+          <article><h2>Capacity, explained simply.</h2><p>Power use and the time your equipment needs to run help guide panel and battery sizing. Solar output varies with weather, shade and roof orientation.</p><a className="text-link" href="/estimator">Explore the preliminary estimator <ArrowRight size={16} /></a></article>
+        </div>
+        <ConceptPlayer title="How a hybrid solar system works" captionFile="/captions/hybrid-solar.vtt" mode="solar" />
+      </div>
+    </section>
+    <ServiceFaqPreview indices={[0, 1, 3]} />
+  </>;
 }
 
 export function CommercialPage() {

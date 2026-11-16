@@ -6,5 +6,5 @@ const labels: Record<string, string> = {
 
 export function Breadcrumbs({ pathname }: { pathname: string }) {
   const parts = pathname.split("/").filter(Boolean);
-  return <nav className="breadcrumbs container" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><span aria-current="page">{labels[parts.at(-1) ?? ""] ?? "Page"}</span></nav>;
+  return <nav className="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><span aria-current="page">{labels[parts.at(-1) ?? ""] ?? "Page"}</span></nav>;
 }

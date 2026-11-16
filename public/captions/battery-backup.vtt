@@ -7,4 +7,7 @@ With grid supply available, the inverter can charge a battery and supply selecte
 When the grid goes off, the inverter changes over to battery power for protected loads.
 
 00:00:05.200 --> 00:00:07.800
+Stored energy supplies the circuits selected for backup.
+
+00:00:07.800 --> 00:00:10.400
 When supply returns and stabilizes, the system resumes its normal operating mode.
