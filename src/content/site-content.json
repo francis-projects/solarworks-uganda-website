@@ -1,0 +1,13 @@
+{
+  "services": [
+    { "id": "backup", "title": "Battery backup", "eyebrow": "Keep essential work going", "description": "A grid-charged battery and hybrid inverter for selected circuits during power interruptions.", "href": "/backup" },
+    { "id": "solar", "title": "Solar + battery", "eyebrow": "Make power on site", "description": "Solar panels, a hybrid inverter and battery storage, planned around your energy needs.", "href": "/solar" },
+    { "id": "commercial", "title": "Commercial & industrial", "eyebrow": "Plan for your operation", "description": "Site-led power planning for shops, clinics, schools, offices and production spaces.", "href": "/commercial" }
+  ],
+  "steps": [
+    { "number": "01", "title": "Tell us what needs power", "description": "Share your location, essential equipment and the problem you want to solve." },
+    { "number": "02", "title": "We review the site", "description": "For a physical assessment, we confirm the travel fee and appointment before visiting." },
+    { "number": "03", "title": "Receive a considered proposal", "description": "The recommendation reflects your loads, site conditions and chosen backup needs." },
+    { "number": "04", "title": "Install and hand over", "description": "If you proceed, the team installs, checks and explains the agreed system." }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "solarworks-uganda-website",
+	"compatibility_date": "2026-11-16",
+	"pages_build_output_dir": "./dist",
+	"vars": {
+		"ENVIRONMENT": "production",
+		"ALLOWED_ORIGINS": ""
+	},
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "solarworks-uganda-leads",
+			"database_id": "58706fca-f651-4604-8ebb-7e1ff0fb1b44",
+			"migrations_dir": "migrations"
+		}
+	],
+  "env": {
+    "preview": {
+      "vars": {
+        "ENVIRONMENT": "preview",
+        "ALLOWED_ORIGINS": ""
+      },
+      "d1_databases": [
+        {
+          "binding": "DB",
+          "database_name": "solarworks-uganda-leads-preview",
+          "database_id": "b6463bbc-e757-44d8-bbd6-20838d849e08",
+          "migrations_dir": "migrations"
+        }
+      ]
+    }
+	}
+}

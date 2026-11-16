@@ -1,0 +1,34 @@
+[
+  {
+    "question": "What is the difference between backup power and a solar system?",
+    "answer": "A battery backup system stores electricity from the grid and supplies selected circuits during an outage. A hybrid solar system adds solar panels, which can produce electricity during daylight and charge the battery when conditions allow."
+  },
+  {
+    "question": "How long will a battery run my equipment?",
+    "answer": "Runtime depends on the appliances connected, their actual power use, the battery and inverter selected, and the condition of the installation. We use your essential loads and the site assessment to size a system. Any early estimate is preliminary."
+  },
+  {
+    "question": "Can I install batteries without solar panels?",
+    "answer": "Yes. A grid-charged battery backup system can be designed without solar panels. It charges when grid supply is available and powers selected circuits during an outage."
+  },
+  {
+    "question": "Do you publish equipment prices online?",
+    "answer": "No. Equipment, installation conditions and travel needs vary by site. SolarWorks Uganda provides a written proposal after understanding the requirements and, when needed, completing a physical site assessment."
+  },
+  {
+    "question": "What happens during a site assessment?",
+    "answer": "The team reviews your electrical supply, essential loads, available installation space, cable routes and safety needs. The company confirms an appointment and the assessment fee before a physical visit is booked."
+  },
+  {
+    "question": "Is an assessment fee credited if I proceed?",
+    "answer": "The intended process is to credit the assessment fee toward an installation if you proceed. The amount, timing and applicable terms will be shown in the written proposal once the assessment fee schedule is configured."
+  },
+  {
+    "question": "What warranty will my system have?",
+    "answer": "Warranty coverage depends on the selected equipment and the installation terms. The applicable manufacturer and workmanship warranty details should be listed in your written proposal before you decide."
+  },
+  {
+    "question": "Do you offer solar power purchase agreements (PPA)?",
+    "answer": "Not at this time. A PPA service is not currently available."
+  }
+]

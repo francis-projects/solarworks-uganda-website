@@ -1,0 +1,42 @@
+name: Build and deploy SolarWorks Uganda
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  build-test-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Build and test
+        run: npm run check
+        env:
+          VITE_SITE_URL: ${{ secrets.VITE_SITE_URL }}
+          VITE_TURNSTILE_SITE_KEY: ${{ vars.VITE_TURNSTILE_SITE_KEY }}
+          VITE_ANALYTICS_TOKEN: ${{ vars.VITE_ANALYTICS_TOKEN }}
+      - name: Deploy preview
+        if: github.event_name == 'pull_request'
+        run: npx wrangler pages deploy dist --project-name=solarworks-uganda-website --branch=preview-${{ github.event.pull_request.number }} --commit-hash=${{ github.sha }}
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      - name: Deploy production
+        if: github.event_name == 'push'
+        run: npx wrangler pages deploy dist --project-name=solarworks-uganda-website --branch=main --commit-hash=${{ github.sha }}
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
