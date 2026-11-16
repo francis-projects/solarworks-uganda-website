@@ -67,7 +67,7 @@ npm run build
 npm run cf:deploy:production
 ```
 
-The GitHub Actions workflow in `.github/workflows/pages.yml` runs checks for pushes and pull requests. The requested GitHub repository has not been created yet; create it under the intended GitHub account, then add `CLOUDFLARE_ACCOUNT_ID` and `CLOUDFLARE_API_TOKEN` as GitHub Actions secrets. The Cloudflare Pages project must exist before the workflow can deploy.
+The GitHub repository is [francis-projects/solarworks-uganda-website](https://github.com/francis-projects/solarworks-uganda-website). Its Actions workflow runs `npm run check` on pushes and pull requests. Production deployment remains a separate manual step after business and legal configuration is complete.
 
 ## Environment configuration
 

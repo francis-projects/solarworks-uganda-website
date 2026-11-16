@@ -6,7 +6,7 @@
 - [x] React, TypeScript, Vite and Cloudflare Pages Functions structure established.
 - [x] Temporary SolarWorks Uganda logo and design tokens created.
 - [x] Preview and production D1 resources created and migrations applied.
-- [ ] GitHub repository creation/push. The connected GitHub tools do not expose repository creation; the local Git credential belongs to a different GitHub account than the connected project profile, so no repository was created under the wrong account.
+- [x] GitHub repository created at https://github.com/francis-projects/solarworks-uganda-website; 57 source files committed to `main`, excluding `sources/`, `AGENTS.md`, local secrets, and build output.
 
 ## Phase 2 — Public website
 
@@ -36,7 +36,7 @@
 
 ## Phase 6 — Verification and release
 
-- [x] Production build and Worker type checks pass; all 8 automated tests pass. SQLite migration validated. Axe checks found no serious or critical WCAG 2.1 A/AA issues on the home, assessment and contact pages; jsdom does not evaluate color contrast.
+- [x] Production build and Worker type checks pass; all 8 automated tests pass. SQLite migration validated. GitHub Actions build and test step passed. Axe checks found no serious or critical WCAG 2.1 A/AA issues on the home, assessment and contact pages; jsdom does not evaluate color contrast.
 - [x] Cloudflare Pages preview deployed at https://preview.solarworks-uganda-website.pages.dev and verified: home and health endpoints return 200, unmapped assessment fee returns unavailable, `/ppa` returns 404, `robots.txt` disallows crawling, and all three submission APIs fail closed with 503 while configuration is missing.
 - [ ] Verify layouts and interactions in real browsers/devices and deploy a public release only after business/legal configuration is complete.
 - [ ] Add custom domain, production Turnstile, analytics, email notifications and legal approvals.
